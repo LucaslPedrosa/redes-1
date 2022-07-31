@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <ImageView fitHeight="277.0" fitWidth="441.0" layoutX="32.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/monitor.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="277.0" fitWidth="441.0" layoutX="811.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/monitor.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="SendButton" layoutX="543.0" layoutY="254.0" mnemonicParsing="false" text="Enviar">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/enviar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="14.0" layoutY="380.0" prefHeight="34.0" prefWidth="117.0" text="ASCII para números" />
+      <Label layoutX="20.0" layoutY="492.0" prefHeight="34.0" prefWidth="117.0" text="BITS" />
+      <Label layoutX="25.0" layoutY="602.0" prefHeight="34.0" prefWidth="107.0" text="BITS Codificados" />
+      <Label layoutX="663.0" layoutY="602.0" prefHeight="34.0" prefWidth="132.0" text="BITS Recebidos" />
+      <Label layoutX="663.0" layoutY="492.0" prefHeight="34.0" prefWidth="132.0" text="BITS Decodificados" />
+      <Label layoutX="659.0" layoutY="380.0" prefHeight="34.0" prefWidth="140.0" text="Números para ASCII" />
+      <TextArea fx:id="ASCIIToNumsTextField" editable="false" layoutX="142.0" layoutY="380.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
+      <TextArea fx:id="BitsTextField" editable="false" layoutX="142.0" layoutY="492.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
+      <TextArea fx:id="BitsCodedTextFied" editable="false" layoutX="142.0" layoutY="602.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
+      <TextArea fx:id="NumsToAsciiTextField" editable="false" layoutX="819.0" layoutY="374.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
+      <TextArea fx:id="BitsDecodedTextField" editable="false" layoutX="819.0" layoutY="484.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
+      <TextArea fx:id="BitsReceivedTextField" editable="false" layoutX="819.0" layoutY="596.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
+      <TextArea fx:id="sendMsgTextField" layoutX="40.0" layoutY="75.0" prefHeight="179.0" prefWidth="318.0" promptText="Escreva aqui" wrapText="true" />
+      <TextArea fx:id="receiveMsgTextField" editable="false" layoutX="819.0" layoutY="75.0" prefHeight="179.0" prefWidth="318.0" promptText="recebaaa" wrapText="true" />
+      <ComboBox fx:id="codeTypeSelectionPanel" layoutX="507.0" layoutY="299.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
