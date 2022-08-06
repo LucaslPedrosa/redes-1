@@ -35,7 +35,7 @@
       <Label layoutX="663.0" layoutY="602.0" prefHeight="34.0" prefWidth="132.0" text="BITS Recebidos" />
       <Label layoutX="663.0" layoutY="492.0" prefHeight="34.0" prefWidth="132.0" text="BITS Decodificados" />
       <Label layoutX="659.0" layoutY="380.0" prefHeight="34.0" prefWidth="140.0" text="Números para ASCII" />
-      <TextArea fx:id="ASCIIToNumsTextField" editable="false" layoutX="142.0" layoutY="380.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
+      <TextArea fx:id="ASCIIToNumsTextField" editable="false" layoutX="142.0" layoutY="380.0" prefHeight="104.0" prefWidth="318.0" text="teste" wrapText="true" />
       <TextArea fx:id="BitsTextField" editable="false" layoutX="142.0" layoutY="492.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
       <TextArea fx:id="BitsCodedTextFied" editable="false" layoutX="142.0" layoutY="602.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
       <TextArea fx:id="NumsToAsciiTextField" editable="false" layoutX="819.0" layoutY="374.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
@@ -44,5 +44,185 @@
       <TextArea fx:id="sendMsgTextField" layoutX="40.0" layoutY="75.0" prefHeight="179.0" prefWidth="318.0" promptText="Escreva aqui" wrapText="true" />
       <TextArea fx:id="receiveMsgTextField" editable="false" layoutX="819.0" layoutY="75.0" prefHeight="179.0" prefWidth="318.0" promptText="recebaaa" wrapText="true" />
       <ComboBox fx:id="codeTypeSelectionPanel" layoutX="507.0" layoutY="299.0" prefWidth="150.0" />
+      <ImageView fx:id="lowimg0" fitHeight="104.0" fitWidth="38.0" layoutX="365.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg2" fitHeight="104.0" fitWidth="38.0" layoutX="441.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg1" fitHeight="104.0" fitWidth="38.0" layoutX="403.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg3" fitHeight="104.0" fitWidth="38.0" layoutX="479.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg4" fitHeight="104.0" fitWidth="38.0" layoutX="517.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg5" fitHeight="104.0" fitWidth="38.0" layoutX="555.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg6" fitHeight="104.0" fitWidth="38.0" layoutX="593.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg7" fitHeight="104.0" fitWidth="38.0" layoutX="631.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg8" fitHeight="104.0" fitWidth="38.0" layoutX="669.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg9" fitHeight="104.0" fitWidth="38.0" layoutX="707.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg10" fitHeight="104.0" fitWidth="38.0" layoutX="745.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lowimg11" fitHeight="104.0" fitWidth="38.0" layoutX="780.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/low.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg1" fitHeight="104.0" fitWidth="38.0" layoutX="365.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg2" fitHeight="104.0" fitWidth="38.0" layoutX="403.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg3" fitHeight="104.0" fitWidth="38.0" layoutX="441.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg4" fitHeight="104.0" fitWidth="38.0" layoutX="479.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg5" fitHeight="104.0" fitWidth="38.0" layoutX="517.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg6" fitHeight="104.0" fitWidth="38.0" layoutX="555.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg7" fitHeight="104.0" fitWidth="38.0" layoutX="593.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg8" fitHeight="104.0" fitWidth="38.0" layoutX="631.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg9" fitHeight="104.0" fitWidth="38.0" layoutX="669.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg10" fitHeight="104.0" fitWidth="38.0" layoutX="707.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg11" fitHeight="104.0" fitWidth="38.0" layoutX="745.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="midimg12" fitHeight="104.0" fitWidth="38.0" layoutX="780.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/mid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg1" fitHeight="61.0" fitWidth="38.0" layoutX="365.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg2" fitHeight="61.0" fitWidth="38.0" layoutX="403.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg3" fitHeight="61.0" fitWidth="38.0" layoutX="441.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg4" fitHeight="61.0" fitWidth="38.0" layoutX="479.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg5" fitHeight="61.0" fitWidth="38.0" layoutX="517.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg6" fitHeight="61.0" fitWidth="38.0" layoutX="555.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg7" fitHeight="61.0" fitWidth="38.0" layoutX="593.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg8" fitHeight="61.0" fitWidth="38.0" layoutX="631.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg9" fitHeight="61.0" fitWidth="38.0" layoutX="669.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg10" fitHeight="61.0" fitWidth="38.0" layoutX="707.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg11" fitHeight="61.0" fitWidth="38.0" layoutX="745.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="highimg12" fitHeight="61.0" fitWidth="38.0" layoutX="780.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/high.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
