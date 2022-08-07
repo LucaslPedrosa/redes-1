@@ -28,7 +28,7 @@ public class Communication {
 
         comparissonBit <<= 1;
         try {
-          Thread.sleep(300);
+          Thread.sleep(controller.getSpeed());
         } catch (Exception e) {
         }
       }
@@ -36,6 +36,6 @@ public class Communication {
       System.out.println("Bits passed: " + bitStreamPointA[i].bitsToString());
       System.out.println("Bits received: " + bitStreamPointB[i].bitsToString());
     }
-    PhysicalReceiverLayer.physicalReceiverLayer(bitStreamPointB,controller);
+    PhysicalReceiverLayer.physicalReceiverLayer(bitStreamPointB, controller);
   }
 }

@@ -33,20 +33,23 @@ public class PhysicalTransmittingLayer {
     for (int i = 0; i < memory.length; i++) {
       memory[i] = new Signal();
 
-      information = frames[i]; // saving the bits on bits represented by x on 00000000 00000000 00000000
-                               // xxxxxxxxx
+      information = frames[i * 4]; // saving the bits on bits represented by x on 00000000 00000000 00000000
+      // xxxxxxxxx
 
-      if (i + 1 < frames.length)
-        information |= (frames[i + 1] << 8); // saving the bits on bits represented by x on 00000000 00000000 xxxxxxxxx
-                                             // 00000000
+      if (i * 4 + 1 < frames.length)
+        information |= (frames[i * 4 + 1] << 8); // saving the bits on bits represented by x on 00000000 00000000
+                                                 // xxxxxxxxx
+      // 00000000
 
-      if (i + 2 < frames.length)
-        information |= (frames[i + 2] << 16); // saving the bits on bits represented by x on 00000000 xxxxxxxxx 00000000
-                                              // 00000000
+      if (i * 4 + 2 < frames.length)
+        information |= (frames[i * 4 + 2] << 16); // saving the bits on bits represented by x on 00000000 xxxxxxxxx
+                                                  // 00000000
+      // 00000000
 
-      if (i + 3 < frames.length)
-        information |= (frames[i + 3] << 24); // saving the bits on bits represented by x on xxxxxxxxx 00000000 00000000
-                                              // 00000000
+      if (i * 4 + 3 < frames.length)
+        information |= (frames[i * 4 + 3] << 24); // saving the bits on bits represented by x on xxxxxxxxx 00000000
+                                                  // 00000000
+      // 00000000
 
       // information var should be a really big number and strange like 218932194 but
       // its ok!
@@ -54,6 +57,10 @@ public class PhysicalTransmittingLayer {
 
       memory[i].setBits(information);
       controller.addToBitsTextField(memory[i].bitsToString());
+      try {
+        Thread.sleep(controller.getSpeed());
+      } catch (Exception e) {
+      }
       controller.addToBitsCodedTextField(memory[i].toSignal() + '\n');
     }
 
@@ -62,6 +69,7 @@ public class PhysicalTransmittingLayer {
 
   public static Signal[] manchesterCoding(int frames[], MainController controller) {
     Signal memory[] = new Signal[1];
+
     return memory;
   }
 

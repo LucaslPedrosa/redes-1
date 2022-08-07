@@ -45,6 +45,40 @@
       <TextArea fx:id="sendMsgTextField" layoutX="40.0" layoutY="75.0" prefHeight="179.0" prefWidth="318.0" promptText="Escreva aqui" wrapText="true" />
       <TextArea fx:id="receiveMsgTextField" editable="false" layoutX="819.0" layoutY="75.0" prefHeight="179.0" prefWidth="318.0" promptText="recebaaa" wrapText="true" />
       <ComboBox fx:id="codeTypeSelectionPanel" layoutX="507.0" layoutY="299.0" prefWidth="150.0" />
+      <AnchorPane layoutX="364.0" layoutY="131.0" prefHeight="104.0" prefWidth="469.0">
+         <children>
+            <ImageView fitHeight="61.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/box.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/box.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="150.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/box.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="225.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/box.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/box.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="375.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/box.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <ImageView fx:id="lowimg0" fitHeight="104.0" fitWidth="38.0" layoutX="365.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/low.png" />
@@ -225,40 +259,16 @@
             <Image url="@../img/high.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="364.0" layoutY="131.0" prefHeight="104.0" prefWidth="469.0">
-         <children>
-            <ImageView fitHeight="61.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/box.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="75.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/box.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="150.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/box.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="225.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/box.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="300.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/box.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="78.0" layoutX="375.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/box.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <Slider fx:id="speedSlider" layoutX="412.0" layoutY="31.0" max="1000.0" min="200.0" prefHeight="0.0" prefWidth="340.0" rotate="180.0" value="600.0" />
+      <Slider fx:id="speedSlider" layoutX="412.0" layoutY="58.0" max="1000.0" min="200.0" prefHeight="0.0" prefWidth="340.0" rotate="180.0" value="600.0" />
+      <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="411.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/turtle.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="68.0" fitWidth="25.0" layoutX="717.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/rabbit.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

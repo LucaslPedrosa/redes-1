@@ -162,14 +162,13 @@ public class MainController implements Initializable {
   private ImageView highImgs[];
   private ImageView midImgs[];
 
-  // int dale = 0;
-
   private ObservableList<String> codeTypes = FXCollections.observableArrayList(
       "Codificacao Binaria",
       "Codificacao Manchester",
       "Codificacao Manchester diferencial");
 
   private int lastSignal = 0;
+  private int miliseconds = 600;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -203,6 +202,10 @@ public class MainController implements Initializable {
       TransmitterApplicationLayer transmitterApplicationLayer = new TransmitterApplicationLayer();
       transmitterApplicationLayer.toTransmitter(message, this);
     });
+
+    speedSlider.setOnMouseDragged(Event -> {
+      this.miliseconds = (int)speedSlider.getValue();
+    }); 
 
   }
 
@@ -265,7 +268,6 @@ public class MainController implements Initializable {
   public void addToReceiveMsgTextField(String message) {
     Platform.runLater(() -> {
       receiveMsgTextField.setText(receiveMsgTextField.getText() + ' ' + message);
-
     });
   }
 
@@ -312,6 +314,10 @@ public class MainController implements Initializable {
 
   public TextArea getASCIIToNumsTextField() {
     return this.ASCIIToNumsTextField;
+  }
+
+  public int getSpeed(){
+    return this.miliseconds;
   }
 
 }

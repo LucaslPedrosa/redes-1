@@ -8,11 +8,18 @@ public class PhysicalReceiverLayer {
     for (int i = 0; i < bitStream.length; i++) {
       controller.addToBitsReceivedTextField(bitStream[i].bitsToString() + '\n');
     }
+    try {
+      Thread.sleep(controller.getSpeed());
+    } catch (Exception e) {
+    }
     int bits[] = new int[1]; // we dont declare this int[] because its supposed he will always be defined
                              // after switch case, this means faster code
     switch (controller.getCodeType()) {
       case 1:
         bits = binaryDecodification(bitStream); // going back to integers
+        for (int i = 0; i < bits.length; i++) {
+          System.out.println((char) bits[i]);
+        }
         break;
       case 2:
 

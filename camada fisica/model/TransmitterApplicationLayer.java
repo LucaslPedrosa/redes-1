@@ -33,7 +33,7 @@ public class TransmitterApplicationLayer {
           String add = toAdd;
 
           painel.setText(painel.getText() + ' ' + add);
-          Thread.sleep(1000);
+          Thread.sleep(controller.getSpeed());
           System.out.println(add);
           
         }
