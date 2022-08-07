@@ -2,7 +2,6 @@ package model;
 
 public class Signal {
 
-  // private static int type = 1;
   private int bits = 0;
 
   public int getBits() {
@@ -12,14 +11,6 @@ public class Signal {
   public void setBits(int bits) {
     this.bits = bits;
   }
-
-  // public static int getType() {
-  // return type;
-  // }
-
-  // public static void setType(int typ) {
-  // type = typ;
-  // }
 
   public String toSignal() {
     String toReturn = "";
@@ -41,7 +32,7 @@ public class Signal {
   public String bitsToString() {
 
     String toReturn = "";
-    int comparator = 1;
+    int comparator = 1; // used to compare if bits are active, start at bit 1
 
     for (int i = 0; i < 32; i++) {
       if (i % 8 == 0)
@@ -55,6 +46,22 @@ public class Signal {
     }
 
     return toReturn;
+  }
+
+  public int[] binaryDecodification() {
+    int signal = getBits();
+    int bits[] = new int[4];
+
+    for(int i = 0; i < 4; i++){
+      bits[i] = signal & 255; // 255 is represented by 11111111 so it will return first 8 active bits
+      signal>>=8;//bitShift 8
+      /*
+        There is no need get worried about negative numbers, 
+        java itfself put another bit in last 8 bits "11111111" but the & gets only last ones
+      */
+    }
+
+    return bits;
   }
 
 }

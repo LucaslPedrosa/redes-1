@@ -39,7 +39,7 @@ public class TransmitterApplicationLayer {
         }
         PhysicalTransmittingLayer.physicalTransmittingLayer(frames, controller);
       } catch (Exception e) {
-        System.out.println("Lol");
+        System.out.println(e.getStackTrace());
       }
     }).start();
 

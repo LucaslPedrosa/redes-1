@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import model.TransmitterApplicationLayer;
@@ -154,11 +155,14 @@ public class MainController implements Initializable {
   @FXML
   private ImageView highimg12;
 
+  @FXML
+  private Slider speedSlider;
+
   private ImageView lowImgs[];
   private ImageView highImgs[];
   private ImageView midImgs[];
 
-  int dale = 0;
+  // int dale = 0;
 
   private ObservableList<String> codeTypes = FXCollections.observableArrayList(
       "Codificacao Binaria",
@@ -222,9 +226,9 @@ public class MainController implements Initializable {
   }
 
   public void addASCIIToNumsTextField(String message) {
-    // Platform.runLater(() -> {
+    Platform.runLater(() -> {
     ASCIIToNumsTextField.setText(ASCIIToNumsTextField.getText() + ' ' + message);
-    // });
+    });
   }
 
   public void addToBitsTextField(String message) {
@@ -300,7 +304,7 @@ public class MainController implements Initializable {
         lowImgs[0].setVisible(true);
       else
         highImgs[0].setVisible(true);
-        
+
       lastSignal = bit;
     });
 

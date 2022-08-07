@@ -23,38 +23,30 @@ public class PhysicalTransmittingLayer {
     Communication.communication(bitStream, controller);
   }
 
-
   public static Signal[] binaryCoding(int frames[], MainController controller) {
 
-    int size = (frames.length - 1) / 4 + 1;
+    int size = (frames.length - 1) / 4 + 1; // a int have 32 bits, so we can store up to 32 signals, an ASCII table goes
+                                            // up to 127 chars or more, so 8 bits for each is more than enough
     Signal memory[] = new Signal[size];
     int information;
 
-    // These bits manipulations are dumb and their complexity are WAY higher than it
-    // should be, but its necessary for
     for (int i = 0; i < memory.length; i++) {
       memory[i] = new Signal();
 
       information = frames[i]; // saving the bits on bits represented by x on 00000000 00000000 00000000
-                                        // xxxxxxxxx
+                               // xxxxxxxxx
 
-      // saving the bits on bits represented by x on 00000000 00000000 xxxxxxxxx
-      // 00000000
       if (i + 1 < frames.length)
-        information |= (frames[i + 1] << 8);
+        information |= (frames[i + 1] << 8); // saving the bits on bits represented by x on 00000000 00000000 xxxxxxxxx
+                                             // 00000000
 
-
-      // saving the bits on bits represented by x on 00000000 xxxxxxxxx 00000000
-      // 00000000
       if (i + 2 < frames.length)
-        information |= (frames[i + 2] << 16);
+        information |= (frames[i + 2] << 16); // saving the bits on bits represented by x on 00000000 xxxxxxxxx 00000000
+                                              // 00000000
 
-
-
-      // saving the bits on bits represented by x on xxxxxxxxx 00000000 00000000
-      // 00000000
       if (i + 3 < frames.length)
-        information |= (frames[i + 3] << 24);
+        information |= (frames[i + 3] << 24); // saving the bits on bits represented by x on xxxxxxxxx 00000000 00000000
+                                              // 00000000
 
       // information var should be a really big number and strange like 218932194 but
       // its ok!
@@ -72,6 +64,5 @@ public class PhysicalTransmittingLayer {
     Signal memory[] = new Signal[1];
     return memory;
   }
-
 
 }
