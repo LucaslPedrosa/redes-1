@@ -68,9 +68,48 @@ public class PhysicalTransmittingLayer {
   }
 
   public static Signal[] manchesterCoding(int frames[], MainController controller) {
-    Signal memory[] = new Signal[1];
+    int size = (frames.length - 1) / 2 + 1;
+    Signal memory[] = new Signal[size];
+    int information;
+    int bit;
+    for (int i = 0; i < frames.length; i++)
+      controller.addToBitsTextField(to8Bits(frames[i]) + ' ');
+
+    for (int i = 0; i < size; i++) {
+      memory[i] = new Signal();
+      information = 0;
+      bit = 1;
+
+      for (int j = 0; j < 8; j++) {
+        information |= ((((frames[i * 2] & bit) ^ 0) != 0) ? 1 : 0) << (j * 2);
+        information |= (((((frames[i * 2] & bit) ^ bit) != 0) ? 1 : 0) << (j * 2 + 1));
+        bit <<= 1;
+      }
+
+      bit = 1;
+      if (i * 2 + 1 < frames.length)
+        for (int j = 0; j < 8; j++) {
+          information |= ((((frames[i * 2 + 1] & bit) ^ 0) != 0) ? 1 : 0) << (j * 2) + 16;
+          information |= (((((frames[i * 2 + 1] & bit) ^ bit) != 0) ? 1 : 0) << (j * 2 + 1) + 16);
+          bit <<= 1;
+        }
+
+      memory[i].setBits(information);
+
+      controller.addToBitsCodedTextField(memory[i].bitsToString());
+    }
 
     return memory;
+  }
+
+  public static String to8Bits(int n) {
+    String toReturn = "";
+    int bit = 1;
+    for (int i = 0; i < 8; i++) {
+      toReturn = ((bit & n) != 0 ? "1" : "0") + toReturn;
+      bit <<= 1;
+    }
+    return toReturn;
   }
 
 }

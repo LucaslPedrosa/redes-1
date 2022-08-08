@@ -18,10 +18,11 @@ public class PhysicalReceiverLayer {
       case 1:
         bits = binaryDecodification(bitStream); // going back to integers
         for (int i = 0; i < bits.length; i++) {
-          System.out.println((char) bits[i]);
+          System.out.print((char) bits[i]);
         }
         break;
       case 2:
+        bits = manchesterDecodification(bitStream);
 
         break;
       default:
@@ -44,6 +45,35 @@ public class PhysicalReceiverLayer {
       }
     }
 
+    return toReturn;
+  }
+
+  public static int[] manchesterDecodification(Signal bitStream[]) {
+    int toReturn[] = new int[bitStream.length * 2];
+    int num; // var used to add get back normal ints and push toReturn array
+    int bit; // var used to compare each of 32 bits
+    int newBit; // var used to receive all signal bits
+    for (int i = 0; i < bitStream.length; i++) {
+      num = 0;
+      bit = 1;
+      newBit = bitStream[i].getBits();
+
+      for (int j = 0; j < 8; j++) {
+        num += ((((newBit & bit) != 0) ? 1 : 0) << j);
+        bit <<= 2;
+      }
+
+      toReturn[i * 2] = num;
+      num = 0;
+      bit = 1;
+      newBit >>= 16;
+
+      for (int j = 0; j < 8; j++) {
+        num += ((newBit & bit) != 0 ? 1 : 0) << j;
+        bit <<= 2;
+      }
+      toReturn[i * 2 + 1] = num;
+    }
     return toReturn;
   }
 }
