@@ -1,3 +1,18 @@
+/**
+ *  @Author : Lucas Pedrosa Larangeira
+ *
+ * 
+ *  Enrollment : 202011430
+ *  Created: 22/07/22
+ *  last change at : 09/08/22
+ *  Name: PysicalTransmittingLayer.java
+ * 
+ *  this layer encodes the ints and put then in a way every char use a 8 bit and 
+ *  we can store 4 in a 32 bits, if its encoded chars will need double the size
+ *  
+ * 
+ *
+ */
 package model;
 
 import controller.MainController;
@@ -68,7 +83,7 @@ public class PhysicalTransmittingLayer {
   }
 
   public static Signal[] manchesterCoding(int frames[], MainController controller) {
-    
+
     /**
      * Please note that im using the manchester encoding as per G.E Thomas, the IEEE
      * one will simply just invert the bits, as it goes 01 10 -> 10 01

@@ -1,3 +1,17 @@
+/**
+ *  @Author : Lucas Pedrosa Larangeira
+ *
+ * 
+ *  Enrollment : 202011430
+ *  Created: 22/07/22
+ *  last change at : 09/08/22
+ *  Name: Signal.java 
+ * 
+ *  
+ *  
+ * 
+ *
+ */
 package model;
 
 public class Signal {
@@ -52,13 +66,14 @@ public class Signal {
     int signal = getBits();
     int bits[] = new int[4];
 
-    for(int i = 0; i < 4; i++){
+    for (int i = 0; i < 4; i++) {
       bits[i] = signal & 255; // 255 is represented by 11111111 so it will return first 8 active bits
-      signal>>=8;//bitShift 8
+      signal >>= 8;// bitShift 8
       /*
-        There is no need get worried about negative numbers, 
-        java itfself put another bit in last 8 bits "11111111" but the & gets only last ones
-      */
+       * There is no need get worried about negative numbers,
+       * java itfself put another bit in last 8 bits "11111111" but the & gets only
+       * last ones
+       */
     }
 
     return bits;

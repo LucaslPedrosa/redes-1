@@ -2,6 +2,9 @@
  * Author: Lucas Pedrosa Larangeira
  * 
  * 
+ * TransmitterAplicationLayer will get the message from TextArea, 
+ * show it on other TextArea then calls for Physicall transmitting layer
+ * 
  * 
  */
 
