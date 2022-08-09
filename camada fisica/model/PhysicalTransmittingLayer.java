@@ -17,6 +17,7 @@ public class PhysicalTransmittingLayer {
         break;
 
       default:
+        bitStream = differentialManchesterCoding(frames, controller);
         break;
     }
 
@@ -93,6 +94,91 @@ public class PhysicalTransmittingLayer {
           information |= (((((frames[i * 2 + 1] & bit) ^ bit) != 0) ? 1 : 0) << (j * 2 + 1) + 16);
           bit <<= 1;
         }
+
+      memory[i].setBits(information);
+
+      controller.addToBitsCodedTextField(memory[i].bitsToString());
+    }
+
+    return memory;
+  }
+
+  public static Signal[] differentialManchesterCoding(int frames[], MainController controller) {
+    int size = (frames.length - 1) / 2 + 1;
+    Signal memory[] = new Signal[size];
+    int information;
+    int bit;
+
+    for (int i = 0; i < frames.length; i++)
+      controller.addToBitsTextField(to8Bits(frames[i]) + ' ');
+
+    for (int i = 0; i < size; i++) {
+      memory[i] = new Signal();
+      information = 0;
+      bit = 1;
+      Boolean lastBit;// lastBit value will be true if HIGH and false if LOW
+
+      if ((frames[i * 2] & bit) != 0) { // first bit deppends only on clock witch starts at HIGH
+        // if start at 1, then it wont change the clock
+        information |= 1; // first bit does change
+        information |= (0 << 1); // kinda useless
+        lastBit = false;
+      } else {
+        information |= 0; // kinda useless;
+        information |= (1 << 1); // activate second bit (this moment i realize its more easy just bit or with
+                                 // number 2)
+        lastBit = true;
+      }
+      bit <<= 1;
+      // for now on, every bit deppends on the last bit
+      for (int j = 1; j < 8; j++) {
+        int info = (((frames[i * 2] & bit) != 0) ? 1 : 0); // witch bit we are working on right now
+        int toAdd; // witch bit will be added
+
+        if (info == 1) {
+          if (lastBit)
+            toAdd = 1; // 1 its coming from behind(la ele), so we keep the one then switch to a zero
+          else
+            toAdd = 2; // 10
+
+          lastBit = !lastBit;
+        } else {
+          if (lastBit)
+            toAdd = 2; // 10
+          else
+            toAdd = 1; // 01
+          // lastBit = lastBit; code with no effect
+        }
+
+        information |= toAdd << (j * 2);
+        bit <<= 1;
+      }
+
+      bit = 1;
+      if (i * 2 + 1 < frames.length) {
+        for (int j = 0; j < 8; j++) {
+          int toAdd;
+          int info = (((frames[i * 2 + 1] & bit) != 0) ? 1 : 0);
+
+          if (info == 1) {
+            if (lastBit)
+              toAdd = 1; // 1 its coming from behind(la ele), so we keep the one then switch to a zero
+            else
+              toAdd = 2; // 10
+
+            lastBit = !lastBit;
+          } else {
+            if (lastBit)
+              toAdd = 2; // 10
+            else
+              toAdd = 1; // 01
+            // lastBit = lastBit; code with no effect
+          }
+
+          information |= toAdd << (j * 2 + 16);
+          bit <<= 1;
+        }
+      }
 
       memory[i].setBits(information);
 

@@ -23,9 +23,9 @@ public class PhysicalReceiverLayer {
         break;
       case 2:
         bits = manchesterDecodification(bitStream);
-
         break;
       default:
+        bits = differentialManchesterDecodification(bitStream);
         break;
     }
 
@@ -74,6 +74,81 @@ public class PhysicalReceiverLayer {
       }
       toReturn[i * 2 + 1] = num;
     }
+    return toReturn;
+  }
+
+  public static int[] differentialManchesterDecodification(Signal bitStream[]) {
+    int toReturn[] = new int[bitStream.length * 2];
+
+    for (int i = 0; i < bitStream.length; i++) {
+      Boolean lastSignal; // used to inform if last bit from tuple is either true = 1 or false = 0
+      int sig = bitStream[i].getBits();
+      int bit = 1;
+      int information;
+
+      if ((sig & bit) != 0) {
+        information = 1;
+        lastSignal = false;
+      } else {
+        information = 0;
+        lastSignal = true;
+      }
+
+      bit <<= 2;
+
+      for (int j = 1; j < 8; j++) {
+
+        if ((sig & bit) != 0) { // last bit was one?
+
+          if (lastSignal) { // then this bit must be a one
+            information |= (1 << j);
+            lastSignal = !lastSignal;
+          } else { // then this bit must be a zero
+            information |= (0 << j);
+          }
+
+        } else {
+          if (lastSignal) {
+            information |= 0 << j;
+          } else {
+            information |= 1 << j;
+            lastSignal = !lastSignal;
+
+          }
+          // lastSignal = lastSignal; dead code, "why did u put this then? learn propurses
+        }
+        bit <<= 2;
+      }
+      toReturn[i * 2] = information;
+      information = 0;
+
+      for (int j = 0; j < 8; j++) {
+
+        if ((sig & bit) != 0) { // last bit was one?
+
+          if (lastSignal) { // then this bit must be a one
+            information |= 1 << j;
+            lastSignal = !lastSignal;
+
+          } else { // then this bit must be a zero
+            information |= 0 << j;
+          }
+
+        } else {
+          if (lastSignal) {
+            information |= 0 << j;
+          } else {
+            information |= 1 << j;
+            lastSignal = !lastSignal;
+
+          }
+          // lastSignal = lastSignal; dead code
+        }
+        bit <<= 2;
+      }
+      toReturn[i * 2 + 1] = information;
+    }
+
     return toReturn;
   }
 }
