@@ -4,10 +4,10 @@ import controller.MainController;
 
 public class ReceiverApplicationLayer {
   public static void receiverApplicationLayer(int bits[], MainController controller) {
-    String fullBits = "";
+    String fullBits = ""; // get every 8 bit and adds to textField
     String msg = "";
     for (int i = 0; i < bits.length; i++) {
-      if (bits[i] == 0)
+      if (bits[i] == 0) // ints equal to 0 must be ignored
         break;
       fullBits = "";
       int comparator = 1;
@@ -35,6 +35,7 @@ public class ReceiverApplicationLayer {
       }
     }
 
+    
     controller.addToReceiveMsgTextField(msg);
     controller.enableButton();
   }

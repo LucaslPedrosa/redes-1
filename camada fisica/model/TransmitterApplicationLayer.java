@@ -20,24 +20,24 @@ public class TransmitterApplicationLayer {
     new Thread(() -> {
       try {
         TextArea painel = controller.getASCIIToNumsTextField();
-        int frames[] = new int[message.length()];
-        String toAdd;
+        int frames[] = new int[message.length()]; // the message as ints
+        String toAdd; // the message that will be displayed
 
         for (int i = 0; i < message.length(); i++) {
-          toAdd = "";
-          toAdd += message.charAt(i);
-          toAdd += " = ";
-          frames[i] = message.charAt(i);
+          toAdd = ""; // start at ""
+          toAdd += message.charAt(i); // get the char
+          toAdd += " = "; // equals it to
+          frames[i] = message.charAt(i); // the ascii int
           toAdd += frames[i];
 
           String add = toAdd;
 
-          painel.setText(painel.getText() + ' ' + add);
-          Thread.sleep(controller.getSpeed());
+          painel.setText(painel.getText() + ' ' + add); // set text
+          Thread.sleep(controller.getSpeed()); // sleeps
           System.out.println(add);
-          
+
         }
-        PhysicalTransmittingLayer.physicalTransmittingLayer(frames, controller);
+        PhysicalTransmittingLayer.physicalTransmittingLayer(frames, controller); // go to physical transmitting Layer
       } catch (Exception e) {
         System.out.println(e.getStackTrace());
       }

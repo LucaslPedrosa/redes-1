@@ -22,10 +22,10 @@ public class PhysicalReceiverLayer {
         }
         break;
       case 2:
-        bits = manchesterDecodification(bitStream);
+        bits = manchesterDecodification(bitStream); // decode as manchester
         break;
       default:
-        bits = differentialManchesterDecodification(bitStream);
+        bits = differentialManchesterDecodification(bitStream); // decode as differential
         break;
     }
 
@@ -49,6 +49,7 @@ public class PhysicalReceiverLayer {
   }
 
   public static int[] manchesterDecodification(Signal bitStream[]) {
+
     int toReturn[] = new int[bitStream.length * 2];
     int num; // var used to add get back normal ints and push toReturn array
     int bit; // var used to compare each of 32 bits
@@ -59,20 +60,21 @@ public class PhysicalReceiverLayer {
       newBit = bitStream[i].getBits();
 
       for (int j = 0; j < 8; j++) {
-        num += ((((newBit & bit) != 0) ? 1 : 0) << j);
-        bit <<= 2;
+        num += ((((newBit & bit) != 0) ? 1 : 0) << j); // the manchester 0 start at 0 and 1 start at 1, so we know witch
+                                                       // one we are working on
+        bit <<= 2; // walk by 2 bits, since if we know one, we also know the other one
       }
 
-      toReturn[i * 2] = num;
-      num = 0;
-      bit = 1;
-      newBit >>= 16;
+      toReturn[i * 2] = num; // set the decrypted 16 bits
+      num = 0; // resets
+      bit = 1; // resets
+      newBit >>= 16; // push the bits to the right
 
       for (int j = 0; j < 8; j++) {
         num += ((newBit & bit) != 0 ? 1 : 0) << j;
         bit <<= 2;
       }
-      toReturn[i * 2 + 1] = num;
+      toReturn[i * 2 + 1] = num; // set the decrypted 16 bits
     }
     return toReturn;
   }
@@ -83,43 +85,43 @@ public class PhysicalReceiverLayer {
     for (int i = 0; i < bitStream.length; i++) {
       Boolean lastSignal; // used to inform if last bit from tuple is either true = 1 or false = 0
       int sig = bitStream[i].getBits();
-      int bit = 1;
-      int information;
+      int bit = 1; // comparisson bit
+      int information; // decoded bits
 
       if ((sig & bit) != 0) {
-        information = 1;
-        lastSignal = false;
+        information = 1; // set first bit
+        lastSignal = false; // if first is true, last is false
       } else {
-        information = 0;
-        lastSignal = true;
+        information = 0; // set last bit
+        lastSignal = true; // if first is false, last is true
       }
 
-      bit <<= 2;
+      bit <<= 2; // walk by two (we are looking in a differential codification, if the first bit
+                 // is x then the second must be false x)
 
       for (int j = 1; j < 8; j++) {
 
         if ((sig & bit) != 0) { // last bit was one?
 
           if (lastSignal) { // then this bit must be a one
-            information |= (1 << j);
-            lastSignal = !lastSignal;
+            information |= (1 << j); // set info
+            lastSignal = !lastSignal; // negate the last signal
           } else { // then this bit must be a zero
-            information |= (0 << j);
+            information |= (0 << j); // unecessary but its here to know better whats happening
           }
 
         } else {
-          if (lastSignal) {
-            information |= 0 << j;
-          } else {
+          if (lastSignal) { // then this bit must be a zero
+            information |= 0 << j; // again, unecessary
+          } else { // then this bit must be a one
             information |= 1 << j;
             lastSignal = !lastSignal;
-
           }
           // lastSignal = lastSignal; dead code, "why did u put this then? learn propurses
         }
         bit <<= 2;
       }
-      toReturn[i * 2] = information;
+      toReturn[i * 2] = information; // first 16 bits from 32 decoded, time to go for the other 16
       information = 0;
 
       for (int j = 0; j < 8; j++) {
@@ -146,9 +148,9 @@ public class PhysicalReceiverLayer {
         }
         bit <<= 2;
       }
-      toReturn[i * 2 + 1] = information;
+      toReturn[i * 2 + 1] = information; // second 16-bits decoded
     }
 
-    return toReturn;
+    return toReturn; // return to sender
   }
 }

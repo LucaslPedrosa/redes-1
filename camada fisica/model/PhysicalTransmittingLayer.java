@@ -5,19 +5,18 @@ import controller.MainController;
 public class PhysicalTransmittingLayer {
 
   public static void physicalTransmittingLayer(int[] frames, MainController controller) {
-    int codeType = controller.getCodeType();
-    Signal[] bitStream = new Signal[1];
+    int codeType = controller.getCodeType(); // get the codification type
+    Signal[] bitStream = new Signal[1]; // the bit stream
 
     switch (codeType) {
       case 1:
-        bitStream = binaryCoding(frames, controller);
+        bitStream = binaryCoding(frames, controller); // encode as binary
         break;
       case 2:
-        bitStream = manchesterCoding(frames, controller);
+        bitStream = manchesterCoding(frames, controller); // encode as manchester
         break;
-
       default:
-        bitStream = differentialManchesterCoding(frames, controller);
+        bitStream = differentialManchesterCoding(frames, controller); // encode as differential
         break;
     }
 
@@ -56,7 +55,7 @@ public class PhysicalTransmittingLayer {
       // its ok!
       // since we have 32 bits of information!
 
-      memory[i].setBits(information);
+      memory[i].setBits(information); // set the bits of the signal i
       controller.addToBitsTextField(memory[i].bitsToString());
       try {
         Thread.sleep(controller.getSpeed());
@@ -69,24 +68,42 @@ public class PhysicalTransmittingLayer {
   }
 
   public static Signal[] manchesterCoding(int frames[], MainController controller) {
-    int size = (frames.length - 1) / 2 + 1;
+    
+    /**
+     * Please note that im using the manchester encoding as per G.E Thomas, the IEEE
+     * one will simply just invert the bits, as it goes 01 10 -> 10 01
+     * 
+     */
+    int size = (frames.length - 1) / 2 + 1; // we want to encode a 8 bits, that will make it a 16 bits, theres enough
+                                            // size for two of these in a integer, so we half it
     Signal memory[] = new Signal[size];
-    int information;
-    int bit;
+    int information; // 16 bit encoded msg
+    int bit; // comparisson bit
+
     for (int i = 0; i < frames.length; i++)
-      controller.addToBitsTextField(to8Bits(frames[i]) + ' ');
+      controller.addToBitsTextField(to8Bits(frames[i]) + ' '); // show every bit before the encoding
 
     for (int i = 0; i < size; i++) {
       memory[i] = new Signal();
       information = 0;
       bit = 1;
 
+      /**
+       * for encoding its necessary to see where the bits are, we compare it with the
+       * bit, then push it using << operator to its place that is j*2 and j*2+1 since
+       * it goes as 2-by-2
+       * 
+       */
       for (int j = 0; j < 8; j++) {
         information |= ((((frames[i * 2] & bit) ^ 0) != 0) ? 1 : 0) << (j * 2);
         information |= (((((frames[i * 2] & bit) ^ bit) != 0) ? 1 : 0) << (j * 2 + 1));
         bit <<= 1;
       }
 
+      /**
+       * the same as before but now its for the other 16 bits, so we are also going
+       * for frames[i*2+1]
+       */
       bit = 1;
       if (i * 2 + 1 < frames.length)
         for (int j = 0; j < 8; j++) {
