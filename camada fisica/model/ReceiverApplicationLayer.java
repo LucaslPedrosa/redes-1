@@ -36,5 +36,6 @@ public class ReceiverApplicationLayer {
     }
 
     controller.addToReceiveMsgTextField(msg);
+    controller.enableButton();
   }
 }

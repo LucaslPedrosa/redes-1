@@ -1,3 +1,18 @@
+/**
+ *  @Author : Lucas Pedrosa Larangeira
+ *
+ * 
+ *  Enrollment : 202011430
+ *  Created: 22/07/22
+ *  last change at : 09/08/22
+ *  Name: Principal.java 
+ * 
+ *  
+ *  
+ * 
+ *
+ */
+
 package controller;
 
 import java.net.URL;
@@ -197,6 +212,8 @@ public class MainController implements Initializable {
     }
 
     SendButton.setOnAction(event -> {
+      SendButton.setDisable(true);
+      codeTypeSelectionPanel.setDisable(true);
       cleanScreens();
       String message = sendMsgTextField.getText();
       TransmitterApplicationLayer transmitterApplicationLayer = new TransmitterApplicationLayer();
@@ -204,8 +221,8 @@ public class MainController implements Initializable {
     });
 
     speedSlider.setOnMouseDragged(Event -> {
-      this.miliseconds = (int)speedSlider.getValue();
-    }); 
+      this.miliseconds = (int) speedSlider.getValue();
+    });
 
   }
 
@@ -230,7 +247,7 @@ public class MainController implements Initializable {
 
   public void addASCIIToNumsTextField(String message) {
     Platform.runLater(() -> {
-    ASCIIToNumsTextField.setText(ASCIIToNumsTextField.getText() + ' ' + message);
+      ASCIIToNumsTextField.setText(ASCIIToNumsTextField.getText() + ' ' + message);
     });
   }
 
@@ -316,8 +333,13 @@ public class MainController implements Initializable {
     return this.ASCIIToNumsTextField;
   }
 
-  public int getSpeed(){
+  public int getSpeed() {
     return this.miliseconds;
+  }
+
+  public void enableButton(){
+    SendButton.setDisable(false);
+    codeTypeSelectionPanel.setDisable(false);
   }
 
 }

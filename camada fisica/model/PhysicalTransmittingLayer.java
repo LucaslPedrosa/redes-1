@@ -98,6 +98,7 @@ public class PhysicalTransmittingLayer {
       memory[i].setBits(information);
 
       controller.addToBitsCodedTextField(memory[i].bitsToString());
+      controller.addToBitsCodedTextField("\n");
     }
 
     return memory;
@@ -183,6 +184,7 @@ public class PhysicalTransmittingLayer {
       memory[i].setBits(information);
 
       controller.addToBitsCodedTextField(memory[i].bitsToString());
+      controller.addToBitsCodedTextField("\n");
     }
 
     return memory;

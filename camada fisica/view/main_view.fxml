@@ -44,7 +44,7 @@
       <TextArea fx:id="BitsReceivedTextField" editable="false" layoutX="819.0" layoutY="596.0" prefHeight="104.0" prefWidth="318.0" wrapText="true" />
       <TextArea fx:id="sendMsgTextField" layoutX="40.0" layoutY="75.0" prefHeight="179.0" prefWidth="318.0" promptText="Escreva aqui" wrapText="true" />
       <TextArea fx:id="receiveMsgTextField" editable="false" layoutX="819.0" layoutY="75.0" prefHeight="179.0" prefWidth="318.0" promptText="recebaaa" wrapText="true" />
-      <ComboBox fx:id="codeTypeSelectionPanel" layoutX="507.0" layoutY="299.0" prefWidth="150.0" />
+      <ComboBox fx:id="codeTypeSelectionPanel" layoutX="439.0" layoutY="299.0" prefHeight="25.0" prefWidth="287.0" />
       <AnchorPane layoutX="364.0" layoutY="131.0" prefHeight="104.0" prefWidth="469.0">
          <children>
             <ImageView fitHeight="61.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
