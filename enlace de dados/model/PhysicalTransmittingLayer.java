@@ -38,7 +38,18 @@ public class PhysicalTransmittingLayer {
     Communication.communication(bitStream, controller);
   }
 
+  /**
+   * binaryCoding method will simply get 8 bits from chars and store it into a
+   * 32bit integer
+   * 
+   * @param frames
+   * @param controller
+   * @return
+   */
   public static Signal[] binaryCoding(int frames[], MainController controller) {
+
+    // There is no redundancy in this encoding, so it is not possible to apply the
+    // violation
 
     int size = (frames.length - 1) / 4 + 1; // a int have 32 bits, so we can store up to 32 signals, an ASCII table goes
                                             // up to 127 chars or more, so 8 bits for each is more than enough
@@ -53,18 +64,15 @@ public class PhysicalTransmittingLayer {
 
       if (i * 4 + 1 < frames.length)
         information |= (frames[i * 4 + 1] << 8); // saving the bits on bits represented by x on 00000000 00000000
-                                                 // xxxxxxxxx
-      // 00000000
+                                                 // xxxxxxxxx 00000000
 
       if (i * 4 + 2 < frames.length)
         information |= (frames[i * 4 + 2] << 16); // saving the bits on bits represented by x on 00000000 xxxxxxxxx
-                                                  // 00000000
-      // 00000000
+                                                  // 00000000 00000000
 
       if (i * 4 + 3 < frames.length)
         information |= (frames[i * 4 + 3] << 24); // saving the bits on bits represented by x on xxxxxxxxx 00000000
-                                                  // 00000000
-      // 00000000
+                                                  // 00000000 00000000
 
       // information var should be a really big number and strange like 218932194 but
       // its ok!
@@ -82,6 +90,13 @@ public class PhysicalTransmittingLayer {
     return memory;
   }
 
+  /**
+   * 
+   * 
+   * @param frames
+   * @param controller
+   * @return
+   */
   public static Signal[] manchesterCoding(int frames[], MainController controller) {
 
     /**
@@ -89,6 +104,7 @@ public class PhysicalTransmittingLayer {
      * one will simply just invert the bits, as it goes 01 10 -> 10 01
      * 
      */
+
     int size = (frames.length - 1) / 2 + 1; // we want to encode a 8 bits, that will make it a 16 bits, theres enough
                                             // size for two of these in a integer, so we half it
     Signal memory[] = new Signal[size];
@@ -126,6 +142,19 @@ public class PhysicalTransmittingLayer {
           information |= (((((frames[i * 2 + 1] & bit) ^ bit) != 0) ? 1 : 0) << (j * 2 + 1) + 16);
           bit <<= 1;
         }
+
+      if (controller.getEnlaceType() == 4) { // apply violation
+        // using 11 and 00 to corrupt Physical layer, and its simple, 11
+        // represents a bit 1 AND a start/end of framing, 00 represents a bit 0 AND a
+        // start/end of framing
+
+        information ^= 2; // integer 2 is the bit Number 2, the number one is represented as 01 if we xor
+                          // the second bit, it will become 11, the bit 00 is represented as 10, if we xor
+                          // the second bit, it will become 00, this is what we want.
+
+        information ^= (1 << 31); // the same as before
+
+      }
 
       memory[i].setBits(information);
 
@@ -211,6 +240,14 @@ public class PhysicalTransmittingLayer {
           information |= toAdd << (j * 2 + 16);
           bit <<= 1;
         }
+      }
+
+      if (controller.getEnlaceType() == 4) { // apply violation
+        // using 11 and 00 to corrupt Physical layer, same as manchester
+
+        information ^= 2;
+
+        information ^= (1 << 31);
       }
 
       memory[i].setBits(information);

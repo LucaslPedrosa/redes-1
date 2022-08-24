@@ -28,6 +28,9 @@ public class Enlacing {
       case 3:
         newMsg = bitStuffingEncoding(msg);
         break;
+      case 4:
+        newMsg = msg;// the enlacing will be done at phisical layer
+        break;
       default:
         break;
     }
@@ -48,7 +51,12 @@ public class Enlacing {
         break;
       case 3:
         newMsg = bitDestuffing(msg);
+        break;
+      case 4:
+        newMsg = msg;
+        break;
       default:
+        System.out.println("Impossible case reached, revise code");
         break;
     }
 

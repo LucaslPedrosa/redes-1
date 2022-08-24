@@ -68,6 +68,7 @@ public class PhysicalReceiverLayer {
     int num; // var used to add get back normal ints and push toReturn array
     int bit; // var used to compare each of 32 bits
     int newBit; // var used to receive all signal bits
+    
     for (int i = 0; i < bitStream.length; i++) {
       num = 0;
       bit = 1;
