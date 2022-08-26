@@ -18,6 +18,13 @@ import controller.MainController;
 
 public class PhysicalReceiverLayer {
 
+  /**
+   * physicalReceiverLayer method will receive a signal and a controller, encode
+   * as selected by controller the signal, then send it to Communitation
+   * 
+   * @param bitStream
+   * @param controller
+   */
   public static void physicalReceiverLayer(Signal bitStream[], MainController controller) {
     for (int i = 0; i < bitStream.length; i++) {
       controller.addToBitsReceivedTextField(bitStream[i].bitsToString() + '\n');
@@ -62,13 +69,20 @@ public class PhysicalReceiverLayer {
     return toReturn;
   }
 
+  /**
+   * read Taneabaum for more info
+   * 
+   * 
+   * @param bitStream 8 bits information represeted as integers
+   * @return decoded signal
+   */
   public static int[] manchesterDecodification(Signal bitStream[]) {
 
     int toReturn[] = new int[bitStream.length * 2];
     int num; // var used to add get back normal ints and push toReturn array
     int bit; // var used to compare each of 32 bits
     int newBit; // var used to receive all signal bits
-    
+
     for (int i = 0; i < bitStream.length; i++) {
       num = 0;
       bit = 1;

@@ -247,6 +247,11 @@ public class PhysicalTransmittingLayer {
 
         information ^= 2;
 
+        // you must be thinking: but the last bit affects the diff manchester encoding,
+        // it wont corrupt whole information? and the answer is simply no, in this case
+        // we change the array AFTER the encoding, and even if we changed BEFORE, it
+        // wont change the information, only the bits transferred
+
         information ^= (1 << 31);
       }
 

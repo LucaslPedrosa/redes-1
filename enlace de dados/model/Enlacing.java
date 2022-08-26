@@ -173,10 +173,11 @@ public class Enlacing {
   }
 
   public String bitStuffingEncoding(String msg) {
-    String newMsg = "";
-    int i = 0;
-    int enlaceFrame = 0;
-    int frame = 1;
+    String newMsg = ""; // msg after stuffing
+    int i = 0; // msg index
+    int enlaceFrame = 0; // size of frame being used (everytime we add one bit, it decreases)
+    int frame = 1; // frame identification
+    int count = 0; // number of times '1' has appeared in a row
 
     newMsg += (char) 126; // 126 is 0111110 as decimal, this is the start
     System.out.println("Start of frame: " + frame);
@@ -184,28 +185,81 @@ public class Enlacing {
 
     while (i < msg.length()) {
 
-      if (msg.charAt(i) == (char) 126) {
-        // does the stuffing
-        newMsg += (char) 125; // 01111101
-        newMsg += (char) 255; // the 0 remaining and 7 useless bytes, im using one's just so there will be a
-                              // char, the 125 and 255 chars are going to need an ESC key
-      } else {
+      // 126 in binary == 011111110, we need to stuff this
+      // my algorithm reads ANY information 8 bits then resets, so a case as:
+      // 00001111 11000000 should never be a problem, i took care of this case just
+      // for learn propurses, but again, it will never be a problem
 
-        if (msg.charAt(i) == (char) 125 || msg.charAt(i) == (char) 255 || msg.charAt(i) == '|') {
-          newMsg += '|'; // ESC KEY
+      int bit = 1 << 7;
+
+      /**
+       * heres the logic: ANY char only needs to be stuffed AT MOST two times,
+       * example:
+       * 00011111 11111111
+       * the second byte needs to be stuffed in the start and in the 'end' after six
+       * more ones, worst case dynamic stuff, we create +8 bits, best case we still
+       * need to create +8 bits, so here's the thing, IF we need to stuff a byte, we
+       * are going to stuff them two times in a row, this way the implemetation is
+       * easier and memory usage still the same
+       * 
+       * 
+       * WARNING: DO NOT INSERT ANY ESPECIAL CHARACTER, FOR SOME REASON JAVA JUST
+       * INVENTS (????) A NEW CHARACTER AND PUT THEM IN PLACE
+       * 
+       * 
+       */
+
+      int char1 = 0; // original 8 bits
+      int char2 = 0; // we are going to use this if we need to stuff
+      boolean stuffed = false;
+
+      for (int j = 0; j < 8; j++) {
+
+        if (((bit & ((int) msg.charAt(i))) != 0)) {
+          count++;
+
+          if (count == 6) {
+            stuffed = true;
+            newMsg += '|'; // ESC key means we stuffed a byte
+            char1 |= (int) msg.charAt(i);
+
+            char2 |= char1;
+            char1 >>= 4;
+            char1 <<= 2;
+
+            char2 <<= 1;
+            char2 = char2 & 30;
+
+            char1 |= 64;// char1 now equals 01xx xx00
+            char2 |= 64;// char2 now equals 010x xxx0
+
+            newMsg += (char) char1;
+            newMsg += (char) char2;
+            count = 0;
+            break;
+          }
+
+        } else {
+          count = 0;
         }
 
+        bit >>= 1;
+
+      }
+
+      if (!stuffed) {
         newMsg += msg.charAt(i);
-        System.out.println(msg.charAt(i));
       }
 
       enlaceFrame--;
       i++;
-      if (enlaceFrame == 0) {
+
+      if (enlaceFrame == 0) { // we need another flag?
         newMsg += (char) 126; // 126 is 0111110 as decimal
         System.out.println("End of frame: " + frame);
 
         enlaceFrame = Math.min(msg.length() - i, size);
+
         if (enlaceFrame != 0) {
           frame++;
           newMsg += (char) 126; // 126 is 0111110 as decimal
@@ -227,16 +281,23 @@ public class Enlacing {
 
     while (i < msg.length()) {
 
-      if (msg.charAt(i) == (char) 125) { // 125 is the stuffed char, recompose it
-        i++;
-        i++;
-        newMsg += (char) 126;
-        continue;
-      }
-
       if (msg.charAt(i) == '|') {
         i++;
-        newMsg += msg.charAt(i);
+        if (msg.charAt(i) == '|')
+          newMsg += msg.charAt(i);
+        else {
+          int char1 = msg.charAt(i);// 01xx xx00
+          i++;
+          int char2 = msg.charAt(i);// 010x xxx0
+          char1 ^= 64;
+          char2 ^= 64;
+
+          char1 <<= 2;
+          char2 >>= 1;
+
+          char1 |= char2;
+          newMsg += (char) char1;
+        }
         i++;
         continue;
       }
